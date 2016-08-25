@@ -1,0 +1,14 @@
+# mvp-demo
+这个demo是在mvc-demo的基础上改造过来的，主要是为了从代码的角度感受一下mvc和mvp的区别
+
+1,建立一个登陆业务类UserLoginPresenter，将mvc-demo中的判断用户输入 和 登录的业务逻辑抽取到UserLoginPresenter中
+
+2,改造MainActivity，创建UserLoginPresenter对象，将业务方面的代码替换成UserLoginPresenter中的方法，保留界面相关代码
+
+3,在UserLoginPresenter中登陆成功与失败需要调用MainActivity中的界面相关代码，考虑使用添加构造方法将MainActivity对象传入，然后在UserLoginPresenter中调用MainActivity中的方法，
+  
+  问题：造成通用性不好的情况(不能同时适用Activity 和 Fragment)
+  
+  解决：提高通用性，放置参数为通用(抽象类或接口，实际开发者接口更通用）
+
+4,定义一个接口IUserLoginView，将需要调用MainActivity中的方法定义在接口IUserLoginView中，在UserLoginPresenter构造方法传入IUserLoginView对象，在需要的地方调用IUserLoginView中的方法，MainActivity中需要实现IUserLoginView接口
